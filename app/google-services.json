@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "8329643150",
+    "project_id": "peakfit-a9836",
+    "storage_bucket": "peakfit-a9836.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8329643150:android:72021ff8472dbbbd7f35df",
+        "android_client_info": {
+          "package_name": "com.example.peakfita"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFuUXdcxEOhpELOVVa81U_orshA6VcUm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

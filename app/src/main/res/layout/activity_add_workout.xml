@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Workout"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/etWorkoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Workout Title (e.g., Chest &amp; Triceps)"
+        android:background="@android:color/white"
+        android:padding="12dp"
+        android:elevation="2dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etWorkoutDesc"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Description or Focus"
+        android:background="@android:color/white"
+        android:padding="12dp"
+        android:elevation="2dp"
+        android:gravity="top|start"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etScheduledTime"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Time (e.g., 18:00)"
+        android:background="@android:color/white"
+        android:padding="12dp"
+        android:elevation="2dp"
+        android:inputType="time"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/btnSaveWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Save Workout"
+        android:textSize="18sp"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
