@@ -1,5 +1,6 @@
 package com.example.peakfita;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +30,14 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public void onBindViewHolder(@NonNull WorkoutViewHolder holder, int position) {
         Workout workout = workoutList.get(position);
         holder.tvTitle.setText(workout.getTitle());
-        holder.tvDesc.setText(workout.getDescription());
 
         holder.btnStart.setOnClickListener(v -> {
-            // כאן בעתיד נעבור למסך "אימון פעיל"
+            Intent intent = new Intent(v.getContext(), WorkoutDetailsActivity.class);
+
+            intent.putExtra("WORKOUT_ID", workout.getWorkoutId());
+            intent.putExtra("WORKOUT_TITLE", workout.getTitle());
+
+            v.getContext().startActivity(intent);
         });
     }
 
