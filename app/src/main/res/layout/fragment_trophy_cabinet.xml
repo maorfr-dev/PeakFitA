@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"> <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Trophy Cabinet"
+    android:textSize="28sp"
+    android:textStyle="bold"
+    android:textColor="#FFD700"
+    android:gravity="center"
+    android:layout_marginTop="32dp"
+    android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your All-Time Personal Records"
+        android:textSize="14sp"
+        android:textColor="#AAAAAA"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTrophies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"/>
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.peakfita;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class WorkoutDetailsActivity extends AppCompatActivity {
 
-    private TextView tvTitle;
+    private TextView tvTitle,tvLastTimeHint;
     private EditText etName, etSets, etReps, etWeight;
     private Button btnAddExercise, btnEndWorkout;
     private RecyclerView rvExercises;
@@ -45,8 +46,23 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
         btnAddExercise = findViewById(R.id.btnAddExercise);
         btnEndWorkout = findViewById(R.id.btnEndWorkout);
         rvExercises = findViewById(R.id.rvExercises);
+        // חיבור ה-TextView המוסתר מהעיצוב
+        tvLastTimeHint = findViewById(R.id.tvLastTimeHint);
 
-        // הגדרת כותרת האימון למעלה
+// הגדרת המאזין לתיבת הטקסט של שם התרגיל
+        etName.setOnFocusChangeListener((v, hasFocus) -> {
+            // hasFocus אומר לנו אם המשתמש כרגע בתוך התיבה או שיצא ממנה
+            if (!hasFocus) {
+                String exerciseName = etName.getText().toString().trim();
+                if (!exerciseName.isEmpty()) {
+                    // אם הוא יצא מהתיבה ויש בה טקסט - מפעילים את החיפוש!
+                    searchLastTimeExercise(exerciseName);
+                } else {
+                    // אם התיבה ריקה, מסתירים את הרמז
+                    tvLastTimeHint.setVisibility(View.GONE);
+                }
+            }
+        });
         if (workoutTitle != null) {
             tvTitle.setText(workoutTitle);
         }
@@ -64,7 +80,58 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
         btnEndWorkout.setOnClickListener(v -> saveWorkoutToFirebase());
     }
 
-    // פונקציה שמוסיפה תרגיל לרשימה במסך (עדיין לא ב-Firebase)
+    // פונקציה שמחפשת בהיסטוריה את הפעם האחרונה שהתרגיל בוצע
+    private void searchLastTimeExercise(String searchName) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("history");
+
+        // קוראים פעם אחת את כל תיקיית ההיסטוריה
+        historyRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(@androidx.annotation.NonNull com.google.firebase.database.DataSnapshot snapshot) {
+                Exercise lastFoundExercise = null;
+                String lastWorkoutDate = "";
+
+                // לולאה ראשונה: עוברים על כל האימונים בהיסטוריה
+                for (com.google.firebase.database.DataSnapshot workoutSnapshot : snapshot.getChildren()) {
+                    Workout workout = workoutSnapshot.getValue(Workout.class);
+
+                    if (workout != null && workout.getExercises() != null) {
+                        // לולאה שנייה: עוברים על כל התרגילים בתוך האימון הספציפי
+                        for (Exercise ex : workout.getExercises()) {
+                            // equalsIgnoreCase מוודא שזה ימצא גם אם הקלדנו "bench" והיה שמור "Bench"
+                            if (ex.getName().equalsIgnoreCase(searchName)) {
+                                // מצאנו התאמה! נשמור אותה (מכיוון שהלולאה רצה מהישן לחדש, ההתאמה האחרונה שתישמר היא הכי עדכנית)
+                                lastFoundExercise = ex;
+                                lastWorkoutDate = workout.getDate(); // שומרים גם את התאריך אם קיים
+                            }
+                        }
+                    }
+                }
+
+                // אחרי שסיימנו לסרוק הכל, בודקים אם מצאנו משהו
+                if (lastFoundExercise != null) {
+                    // מרכיבים את המשפט שיוצג למשתמש
+                    String hint = "בפעם הקודמת: " +
+                            lastFoundExercise.getSets() + " סטים | " +
+                            lastFoundExercise.getReps() + " חזרות | " +
+                            lastFoundExercise.getWeight() + " ק\"ג";
+
+                    tvLastTimeHint.setText(hint);
+                    tvLastTimeHint.setVisibility(View.VISIBLE); // מדליקים את הטקסט!
+                } else {
+                    // לא מצאנו תרגיל כזה בהיסטוריה
+                    tvLastTimeHint.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@androidx.annotation.NonNull com.google.firebase.database.DatabaseError error) {
+                // במקרה של שגיאה בחיבור, פשוט נשאיר את הטקסט מוסתר
+                tvLastTimeHint.setVisibility(View.GONE);
+            }
+        });
+    }
     private void addExerciseToList() {
         String name = etName.getText().toString().trim();
         String setsStr = etSets.getText().toString().trim();

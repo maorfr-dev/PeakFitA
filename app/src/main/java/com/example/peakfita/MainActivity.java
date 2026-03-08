@@ -32,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_workouts) {
-                replaceFragment(new WorkoutsFragment());
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutsFragment()).commit();
                 return true;
             } else if (id == R.id.nav_history) {
                 Toast.makeText(this, "היסטוריה בקרוב", Toast.LENGTH_SHORT).show();
-                // replaceFragment(new HistoryFragment());
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistoryFragment()).commit();
                 return true;
             } else if (id == R.id.nav_gemini) {
                 Toast.makeText(this, "Gemini AI בקרוב", Toast.LENGTH_SHORT).show();
                 // replaceFragment(new GeminiFragment());
                 return true;
-            } else if (id == R.id.nav_profile) {
+            } else if (id == R.id.nav_settings) {
                 logoutUser();
                 return true;
             }
