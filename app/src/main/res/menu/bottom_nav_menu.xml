@@ -1,13 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_workouts"
-        android:icon="@drawable/selector_workouts"
+        android:icon="@drawable/workouts"
         android:title="My Workouts"
         />
 
     <item
         android:id="@+id/nav_history"
-        android:icon="@drawable/selector_history"
+        android:icon="@drawable/history2"
         android:title="History"
         />
 
@@ -18,12 +18,12 @@
 
     <item
         android:id="@+id/nav_gemini"
-        android:icon="@drawable/selector_settings"
+        android:icon="@drawable/common_google_signin_btn_icon_light_normal"
         android:title="Gemini" />
 
     <item
         android:id="@+id/nav_settings"
-        android:icon="@drawable/selector_settings"
+        android:icon="@color/common_google_signin_btn_tint"
         android:title="Profile"
 
         />

@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 // replaceFragment(new GeminiFragment());
                 return true;
             } else if (id == R.id.nav_settings) {
-                logoutUser();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new SettingsFragment())
+                        .commit();
                 return true;
             }
             return false;
