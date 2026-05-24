@@ -1,17 +1,20 @@
 package com.example.peakfita;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,12 +30,14 @@ import java.util.Locale;
 
 public class WorkoutsFragment extends Fragment {
 
-    private Button[] dayButtons = new Button[7];
+    // עדכנו ל-MaterialButton כדי שיתאים לעיצוב החדש
+    private MaterialButton[] dayButtons = new MaterialButton[7];
     private String[] weekDates = new String[7];
     private int currentSelectedDay = 1;
     private String currentSelectedDate;
 
     private RecyclerView rvWorkouts;
+    private LinearLayout llEmptyState; // המשתנה למסך הריק
     private WorkoutAdapter adapter;
     private List<Workout> workoutList;
 
@@ -47,16 +52,14 @@ public class WorkoutsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         setupWeekDates();
 
-
+        llEmptyState = view.findViewById(R.id.llEmptyState);
         rvWorkouts = view.findViewById(R.id.rvWorkouts);
         rvWorkouts.setLayoutManager(new LinearLayoutManager(getContext()));
         workoutList = new ArrayList<>();
         adapter = new WorkoutAdapter(workoutList);
         rvWorkouts.setAdapter(adapter);
-
 
         dayButtons[0] = view.findViewById(R.id.btnDay1);
         dayButtons[1] = view.findViewById(R.id.btnDay2);
@@ -65,7 +68,6 @@ public class WorkoutsFragment extends Fragment {
         dayButtons[4] = view.findViewById(R.id.btnDay5);
         dayButtons[5] = view.findViewById(R.id.btnDay6);
         dayButtons[6] = view.findViewById(R.id.btnDay7);
-
 
         for (int i = 0; i < dayButtons.length; i++) {
             final int dayIndex = i + 1;
@@ -79,7 +81,6 @@ public class WorkoutsFragment extends Fragment {
             });
         }
 
-
         FloatingActionButton fabAdd = view.findViewById(R.id.fabAddWorkout);
         fabAdd.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), AddWorkoutActivity.class);
@@ -87,7 +88,6 @@ public class WorkoutsFragment extends Fragment {
             intent.putExtra("selectedDate", currentSelectedDate);
             startActivity(intent);
         });
-
 
         Calendar calendar = Calendar.getInstance();
         int todayIndex = calendar.get(Calendar.DAY_OF_WEEK);
@@ -97,13 +97,11 @@ public class WorkoutsFragment extends Fragment {
         loadWorkoutsForDate(currentSelectedDate);
     }
 
-
     private void setupWeekDates() {
         Calendar calendar = Calendar.getInstance();
         // מחזיר את לוח השנה ליום ראשון של השבוע הנוכחי
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
 
         for (int i = 0; i < 7; i++) {
             weekDates[i] = sdf.format(calendar.getTime());
@@ -111,18 +109,27 @@ public class WorkoutsFragment extends Fragment {
         }
     }
 
+    // מתודה מעודכנת שצובעת את הכפתורים בזהב ושחור בעזרת ColorStateList
     private void updateSelectedDay(int selectedDay) {
         for (int i = 0; i < dayButtons.length; i++) {
-            dayButtons[i].setSelected(i == (selectedDay - 1));
+            if (i == (selectedDay - 1)) {
+                // כפתור נבחר - רקע זהב וטקסט שחור
+                dayButtons[i].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD700")));
+                dayButtons[i].setTextColor(Color.parseColor("#121212"));
+            } else {
+                // כפתור לא נבחר - רקע כהה וטקסט לבן
+                dayButtons[i].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1E1E1E")));
+                dayButtons[i].setTextColor(Color.parseColor("#FFFFFF"));
+            }
         }
     }
 
-
     private void loadWorkoutsForDate(String date) {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) return;
+
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId).child("workouts");
-
 
         ref.orderByChild("date").equalTo(date)
                 .addValueEventListener(new ValueEventListener() {
@@ -136,6 +143,15 @@ public class WorkoutsFragment extends Fragment {
                             }
                         }
                         adapter.notifyDataSetChanged();
+
+                        // ניהול תצוגת ה-Empty State מול רשימת האימונים
+                        if (workoutList.isEmpty()) {
+                            rvWorkouts.setVisibility(View.GONE);
+                            llEmptyState.setVisibility(View.VISIBLE);
+                        } else {
+                            rvWorkouts.setVisibility(View.VISIBLE);
+                            llEmptyState.setVisibility(View.GONE);
+                        }
                     }
 
                     @Override

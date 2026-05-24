@@ -1,57 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#121212"
+    android:layoutDirection="rtl"
+    android:gravity="center"
     tools:context=".LoginActivity">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PeakForm"
+        android:textColor="#FFD700"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ברוך שובך! התחבר למערכת"
+        android:textColor="#AAAAAA"
+        android:textSize="18sp"
+        android:layout_marginBottom="40dp" />
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#1E1E1E"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="24dp">
 
-        <EditText
-            android:id="@+id/LeTEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="text" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/LeTPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/LeTEmail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="אימייל"
+                android:inputType="textEmailAddress"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login" />
+            <EditText
+                android:id="@+id/LeTPass"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="סיסמה"
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:id="@+id/tVResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
+            <CheckBox
+                android:id="@+id/stayConnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="השאר אותי מחובר"
+                android:textColor="#AAAAAA"
+                android:buttonTint="#FFD700"
+                android:layout_marginBottom="20dp" />
 
-        <CheckBox
-            android:id="@+id/stayConnect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stay Connected" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="התחבר"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#FFD700"
+                app:cornerRadius="16dp"
+                android:textColor="#121212" />
 
-        <TextView
-            android:id="@+id/tVRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Have no Account? Register Here"
-            android:textColor="#3F51B5" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tVResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#FF3B30"
+                android:layout_marginTop="12dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tVRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="אין לך משתמש? הירשם כאן"
+        android:textColor="#FFD700"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+</LinearLayout>

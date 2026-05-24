@@ -4,30 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F8F9FA">
+    android:padding="24dp"
+    android:background="#121212"
+    android:layoutDirection="rtl">
 
-    <Button
-        android:id="@+id/btnTrophyCabinet"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:text="🏆 My Trophy Cabinet"
-        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:text="היסטוריית אימונים"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="#FFD700"
-        android:backgroundTint="#2C2C2C"
-        app:cornerRadius="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="כל ההישגים והאימונים שלך במקום אחד"
+        android:textSize="16sp"
+        android:textColor="#AAAAAA"
+        android:layout_marginBottom="24dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTrophyCabinet"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="🏆 ארון הגביעים שלי"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FFD700"
+        app:backgroundTint="#1E1E1E"
+        app:strokeColor="#FFD700"
+        app:strokeWidth="1.5dp"
+        app:cornerRadius="16dp"
         android:layout_marginBottom="24dp"
-        android:elevation="4dp"/>
+        app:elevation="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Past Workouts"
+        android:text="אימוני עבר"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#333333"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="12dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,6 +55,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="80dp" />
+        android:paddingBottom="20dp" />
 
 </LinearLayout>

@@ -1,103 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="#121212"
+    android:layoutDirection="rtl">
 
     <TextView
         android:id="@+id/tvActiveWorkoutTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Active Workout"
+        android:text="תיעוד אימון פעיל"
         android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="#333333"
-        android:layout_marginBottom="16dp" />
+        android:textColor="#FFD700"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp" />
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/white"
-        android:padding="16dp"
-        android:elevation="4dp"
+        app:cardBackgroundColor="#1E1E1E"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
         android:layout_marginBottom="16dp">
-
-        <EditText
-            android:id="@+id/etExerciseName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Exercise Name (e.g. Bench Press)"
-            android:layout_marginBottom="8dp"/>
-        <TextView
-            android:id="@+id/tvLastTimeHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#888888"
-            android:textSize="13sp"
-            android:textStyle="italic"
-            android:visibility="gone"
-            android:layout_marginBottom="12dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <EditText
-                android:id="@+id/etSets"
-                android:layout_width="0dp"
+                android:id="@+id/etExerciseName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Sets"
-                android:inputType="number" />
+                android:hint="שם התרגיל (לדוגמה: לחיצת חזה)"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:layout_marginBottom="12dp"/>
 
-            <EditText
-                android:id="@+id/etReps"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tvLastTimeHint"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Reps"
-                android:inputType="number" />
+                android:textColor="#AAAAAA"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:visibility="gone"
+                android:layout_marginBottom="12dp"/>
 
-            <EditText
-                android:id="@+id/etWeight"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Weight (kg)"
-                android:inputType="numberDecimal" />
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:weightSum="3">
+
+                <EditText
+                    android:id="@+id/etSets"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="סטים"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"
+                    android:backgroundTint="#FFD700"
+                    android:inputType="number"
+                    android:layout_marginEnd="8dp"/>
+
+                <EditText
+                    android:id="@+id/etReps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="חזרות"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"
+                    android:backgroundTint="#FFD700"
+                    android:inputType="number"
+                    android:layout_marginEnd="8dp"/>
+
+                <EditText
+                    android:id="@+id/etWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="משקל (ק״ג)"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"
+                    android:backgroundTint="#FFD700"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddExercise"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="+ הוסף תרגיל לרשימה"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                app:backgroundTint="#1E1E1E"
+                app:strokeColor="#FFD700"
+                app:strokeWidth="1dp"
+                app:cornerRadius="12dp"
+                android:textColor="#FFD700"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnAddExercise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+ Add Exercise"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#4CAF50"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExercises"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:clipToPadding="false"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEndWorkout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="End Workout"
+        android:text="סיום ושמירת אימון"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="#F44336"
-        android:textColor="#FFFFFF" />
+        app:backgroundTint="#FFD700"
+        app:cornerRadius="16dp"
+        android:textColor="#121212" />
 
 </LinearLayout>

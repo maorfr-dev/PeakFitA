@@ -19,37 +19,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        bottomNavigationView.setItemIconTintList(null);
-
+        // טעינת מסך הבית (Dashboard) כברירת מחדל בפתיחת האפליקציה
         if (savedInstanceState == null) {
-            replaceFragment(new WorkoutsFragment());
-            bottomNavigationView.setSelectedItemId(R.id.nav_workouts);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment())
+                    .commit();
         }
-
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-
-            if (id == R.id.nav_workouts) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutsFragment()).commit();
-                return true;
-            } else if (id == R.id.nav_history) {
-                Toast.makeText(this, "היסטוריה בקרוב", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistoryFragment()).commit();
-                return true;
-            } else if (id == R.id.nav_gemini) {
-                Toast.makeText(this, "Gemini AI בקרוב", Toast.LENGTH_SHORT).show();
-                // replaceFragment(new GeminiFragment());
-                return true;
-            } else if (id == R.id.nav_settings) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new SettingsFragment())
-                        .commit();
-                return true;
-            }
-            return false;
-        });
     }
 
     private void replaceFragment(Fragment fragment) {

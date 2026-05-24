@@ -1,58 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#121212"
+    android:layoutDirection="rtl"
+    android:gravity="center"
     tools:context=".RegisterActivity">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PeakForm"
+        android:textColor="#FFD700"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הצטרף אלינו! צור חשבון חדש"
+        android:textColor="#AAAAAA"
+        android:textSize="18sp"
+        android:layout_marginBottom="40dp" />
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" >
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#1E1E1E"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="24dp">
 
-        <EditText
-            android:id="@+id/eTEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="text"
-            android:textSize="24sp" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/eTPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="text"
-            android:textSize="24sp" />
+            <EditText
+                android:id="@+id/eTEmail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="אימייל"
+                android:inputType="textEmailAddress"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/createUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register" />
+            <EditText
+                android:id="@+id/eTPass"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="סיסמה (6 תווים לפחות)"
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp" />
 
-        <TextView
-            android:id="@+id/tVMsg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-             />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createUser"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="הרשם למערכת"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#FFD700"
+                app:cornerRadius="16dp"
+                android:textColor="#121212" />
 
-        <TextView
-            android:id="@+id/connectCheck"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Already Registered?Press Here"
-            android:textColor="#3F51B5"/>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tVMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#FF3B30"
+                android:layout_marginTop="12dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/connectCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="כבר רשום? התחבר כאן"
+        android:textColor="#FFD700"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+</LinearLayout>

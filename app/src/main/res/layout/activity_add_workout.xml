@@ -1,59 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="#F5F5F5">
+    android:background="#121212"
+    android:layoutDirection="rtl">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create New Workout"
-        android:textSize="24sp"
+        android:text="יצירת אימון חדש"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_marginBottom="24dp" />
-
-    <EditText
-        android:id="@+id/etWorkoutTitle"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Workout Title (e.g., Chest &amp; Triceps)"
-        android:background="@android:color/white"
-        android:padding="12dp"
-        android:elevation="2dp"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/etWorkoutDesc"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:hint="Description or Focus"
-        android:background="@android:color/white"
-        android:padding="12dp"
-        android:elevation="2dp"
-        android:gravity="top|start"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/etScheduledTime"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Time (e.g., 18:00)"
-        android:background="@android:color/white"
-        android:padding="12dp"
-        android:elevation="2dp"
-        android:inputType="time"
+        android:gravity="center"
+        android:textColor="#FFD700"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="32dp" />
 
-    <Button
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#1E1E1E"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/etWorkoutTitle"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="שם האימון (לדוגמה: חזה ויד אחורית)"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/etWorkoutDesc"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="תיאור או דגשים לאימון"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:gravity="top|start"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/etScheduledTime"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="שעה מתוכננת (לדוגמה: 18:00)"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#888888"
+                android:backgroundTint="#FFD700"
+                android:padding="12dp"
+                android:inputType="time" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveWorkout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Save Workout"
-        android:textSize="18sp"
-        android:backgroundTint="#2196F3"
-        android:textColor="#FFFFFF" />
+        android:layout_height="65dp"
+        android:text="שמור אימון מתוכנן"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="#FFD700"
+        app:cornerRadius="16dp"
+        android:textColor="#121212"
+        android:layout_marginBottom="16dp"/>
 
 </LinearLayout>
