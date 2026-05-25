@@ -11,22 +11,39 @@
     android:gravity="center"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PeakForm"
-        android:textColor="#FFD700"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ברוך שובך! התחבר למערכת"
-        android:textColor="#AAAAAA"
-        android:textSize="18sp"
-        android:layout_marginBottom="40dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PEAKFORM"
+            android:textColor="#FFD700"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log in to your account"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -46,7 +63,7 @@
                 android:id="@+id/LeTEmail"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="אימייל"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#888888"
@@ -58,7 +75,7 @@
                 android:id="@+id/LeTPass"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="סיסמה"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#888888"
@@ -70,7 +87,7 @@
                 android:id="@+id/stayConnect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="השאר אותי מחובר"
+                android:text="Keep Me Signed In"
                 android:textColor="#AAAAAA"
                 android:buttonTint="#FFD700"
                 android:layout_marginBottom="20dp" />
@@ -79,7 +96,7 @@
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="התחבר"
+                android:text="Log In"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:backgroundTint="#FFD700"
@@ -102,7 +119,8 @@
         android:id="@+id/tVRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="אין לך משתמש? הירשם כאן"
+        android:text="New To PeakForm?
+        Register Here"
         android:textColor="#FFD700"
         android:textSize="16sp"
         android:textStyle="bold"

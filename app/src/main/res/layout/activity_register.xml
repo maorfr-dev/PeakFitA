@@ -11,22 +11,39 @@
     android:gravity="center"
     tools:context=".RegisterActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PeakForm"
-        android:textColor="#FFD700"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="הצטרף אלינו! צור חשבון חדש"
-        android:textColor="#AAAAAA"
-        android:textSize="18sp"
-        android:layout_marginBottom="40dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PEAKFORM"
+            android:textColor="#FFD700"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join us and track your fitness"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -46,7 +63,7 @@
                 android:id="@+id/eTEmail"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="אימייל"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#888888"
@@ -58,7 +75,7 @@
                 android:id="@+id/eTPass"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="סיסמה (6 תווים לפחות)"
+                android:hint="Password ( Min .6 Char)"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#888888"
@@ -70,7 +87,7 @@
                 android:id="@+id/createUser"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="הרשם למערכת"
+                android:text="Register "
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:backgroundTint="#FFD700"
@@ -93,7 +110,7 @@
         android:id="@+id/connectCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="כבר רשום? התחבר כאן"
+        android:text="Already Registered ? Log In Here"
         android:textColor="#FFD700"
         android:textSize="16sp"
         android:textStyle="bold"

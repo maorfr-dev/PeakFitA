@@ -1,14 +1,20 @@
 package com.example.peakfita;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -31,6 +37,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         Workout workout = workoutList.get(position);
         holder.tvTitle.setText(workout.getTitle());
 
+        // מעבר למסך פרטי האימון (הקוד המקורי שלך)
         holder.btnStart.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), WorkoutDetailsActivity.class);
 
@@ -38,6 +45,40 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
             intent.putExtra("WORKOUT_TITLE", workout.getTitle());
 
             v.getContext().startActivity(intent);
+        });
+
+        // תוספת: לחיצה ארוכה למחיקת אימון
+        holder.itemView.setOnLongClickListener(v -> {
+            Context context = v.getContext(); // שולפים את ה-Context מהרכיב עליו לחצנו
+
+            new AlertDialog.Builder(context)
+                    .setTitle("Delete Workout")
+                    .setMessage("Are you sure you want to delete '" + workout.getTitle() + "'?")
+                    .setPositiveButton("Yes, Delete", (dialog, which) -> {
+
+                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                        FirebaseDatabase.getInstance().getReference("users")
+                                .child(userId)
+                                .child("workouts")
+                                .child(workout.getWorkoutId()) // מחיקה לפי ה-ID הייחודי
+                                .removeValue()
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(context, "Workout deleted successfully", Toast.LENGTH_SHORT).show();
+                                    // הערה: אם אתה משתמש ב-ValueEventListener במסך הקודם,
+                                    // הרשימה תתרענן אוטומטית כי פיירבייס מזהה שינוי.
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(context, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+                    .create()
+                    .show();
+
+            return true; // מסמן למערכת שהלחיצה הארוכה טופלה
         });
     }
 
