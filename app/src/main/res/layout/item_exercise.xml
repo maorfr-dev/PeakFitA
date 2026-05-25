@@ -24,7 +24,7 @@
             android:id="@+id/tvItemExerciseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="שם התרגיל"
+            android:text="Exercise Name"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
@@ -41,7 +41,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="סטים: 3"
+                android:text="Sets: 3"
                 android:textColor="#AAAAAA"
                 android:textSize="15sp" />
 
@@ -50,7 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="חזרות: 10"
+                android:text="Reps: 10"
                 android:textColor="#AAAAAA"
                 android:textSize="15sp" />
 
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="60 ק״ג"
+                android:text="60 kg"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#FFD700" />

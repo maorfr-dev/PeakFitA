@@ -7,18 +7,42 @@
     android:padding="16dp"
     android:background="#121212"
     android:layoutDirection="rtl">
-
-    <TextView
-        android:id="@+id/tvActiveWorkoutTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="תיעוד אימון פעיל"
-        android:textSize="28sp"
-        android:textStyle="bold"
+        android:orientation="vertical"
         android:gravity="center"
-        android:textColor="#FFD700"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PEAKFORM"
+            android:textColor="#FFD700"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:id="@+id/tvActiveWorkoutTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Track Your Active Workout"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fill in Your Exercises"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -38,7 +62,7 @@
                 android:id="@+id/etExerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="שם התרגיל (לדוגמה: לחיצת חזה)"
+                android:hint="Exercise Name"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#888888"
                 android:backgroundTint="#FFD700"
@@ -66,7 +90,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="סטים"
+                    android:hint="Sets"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#888888"
                     android:backgroundTint="#FFD700"
@@ -78,7 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="חזרות"
+                    android:hint="Reps"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#888888"
                     android:backgroundTint="#FFD700"
@@ -90,7 +114,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="משקל (ק״ג)"
+                    android:hint="Weight (kg)"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#888888"
                     android:backgroundTint="#FFD700"
@@ -101,7 +125,7 @@
                 android:id="@+id/btnAddExercise"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="+ הוסף תרגיל לרשימה"
+                android:text="+ Add Exercise to List"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
                 app:backgroundTint="#1E1E1E"
@@ -124,7 +148,7 @@
         android:id="@+id/btnEndWorkout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="סיום ושמירת אימון"
+        android:text="Finish and Save Workout"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="#FFD700"

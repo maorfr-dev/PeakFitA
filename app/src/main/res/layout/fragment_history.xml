@@ -8,29 +8,45 @@
     android:background="#121212"
     android:layoutDirection="rtl">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="היסטוריית אימונים"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="#FFD700"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="4dp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="כל ההישגים והאימונים שלך במקום אחד"
-        android:textSize="16sp"
-        android:textColor="#AAAAAA"
-        android:layout_marginBottom="24dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PEAKFORM"
+            android:textColor="#FFD700"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Workout History"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Check Out Your Workouts And Achievments"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTrophyCabinet"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:text="🏆 ארון הגביעים שלי"
+        android:text="🏆 All-Time PR's"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#FFD700"
@@ -44,7 +60,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="אימוני עבר"
+        android:text="Past Workouts"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"

@@ -36,6 +36,14 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public void onBindViewHolder(@NonNull WorkoutViewHolder holder, int position) {
         Workout workout = workoutList.get(position);
         holder.tvTitle.setText(workout.getTitle());
+        // הגדרת התיאור של האימון
+        if (workout.getDescription() != null && !workout.getDescription().trim().isEmpty()) {
+            holder.tvDesc.setVisibility(View.VISIBLE);
+            holder.tvDesc.setText(workout.getDescription());
+        } else {
+            // אם אין תיאור, מסתירים את תיבת הטקסט כדי שלא יהיה חלל ריק
+            holder.tvDesc.setVisibility(View.GONE);
+        }
 
         // מעבר למסך פרטי האימון (הקוד המקורי שלך)
         holder.btnStart.setOnClickListener(v -> {

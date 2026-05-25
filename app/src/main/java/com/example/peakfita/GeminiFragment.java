@@ -48,11 +48,11 @@ public class GeminiFragment extends Fragment {
         String cleanMuscle = muscle.toLowerCase();
         StringBuilder response = new StringBuilder();
 
-        if (cleanMuscle.contains("חזה")) {
+        if (cleanMuscle.contains("Chest")) {
             response.append("🤖 המלצות Gemini לאימון חזה (Chest):\n\n");
-            response.append("1. לחיצת חזה עם מוט (Bench Press) - 4 סטים של 8 חזרות.\n");
-            response.append("2. לחיצת חזה עליון עם דאמבלים (Incline Dumbbell Press) - 3 סטים של 10 חזרות.\n");
-            response.append("3. פרפר בכבלים (Cable Crossover) - 3 סטים של 12 חזרות למיקוד ובידוד השריר.");
+            response.append("1. Bench Press With BarBell (Bench Press) - 4 Sets of 8 Reps.\n");
+            response.append("2.  (Incline Dumbbell Press) - 3 Sets of 10 Reps.\n");
+            response.append("3. (Cable Crossover) - 3 Sets of 12 Reps.");
         } else if (cleanMuscle.contains("גב")) {
             response.append("🤖 המלצות Gemini לאימון גב (Back):\n\n");
             response.append("1. מתח עם משקל גוף או פולי עליון (Lat Pulldown) - 4 סטים של 8 חזרות.\n");

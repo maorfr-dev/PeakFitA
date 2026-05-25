@@ -23,7 +23,7 @@
             android:id="@+id/tvWorkoutTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="כותרת אימון"
+            android:text="Workout Title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF" />
@@ -32,7 +32,7 @@
             android:id="@+id/tvWorkoutDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="תיאור האימון יופיע כאן..."
+            android:text="Workout Description Will Show Here..."
             android:textSize="14sp"
             android:textColor="#AAAAAA"
             android:layout_marginTop="6dp" />

@@ -23,7 +23,7 @@
             android:id="@+id/tvHistoryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="כותרת אימון"
+            android:text="Workout Title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF" />
@@ -32,7 +32,7 @@
             android:id="@+id/tvHistoryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="תאריך"
+            android:text="Date"
             android:textSize="14sp"
             android:textColor="#AAAAAA"
             android:layout_marginTop="4dp" />
@@ -41,7 +41,7 @@
             android:id="@+id/tvHistoryExercisesCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 תרגילים הושלמו ✓"
+            android:text="0 Exercises Completed ✓"
             android:textSize="15sp"
             android:textColor="#FFD700"
             android:layout_marginTop="12dp"

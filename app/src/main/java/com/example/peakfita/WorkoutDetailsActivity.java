@@ -112,10 +112,10 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
                 // אחרי שסיימנו לסרוק הכל, בודקים אם מצאנו משהו
                 if (lastFoundExercise != null) {
                     // מרכיבים את המשפט שיוצג למשתמש
-                    String hint = "בפעם הקודמת: " +
-                            lastFoundExercise.getSets() + " סטים | " +
-                            lastFoundExercise.getReps() + " חזרות | " +
-                            lastFoundExercise.getWeight() + " ק\"ג";
+                    String hint = "Last Time: " +
+                            lastFoundExercise.getSets() + " Sets | " +
+                            lastFoundExercise.getReps() + " Reps | " +
+                            lastFoundExercise.getWeight() + " kg";
 
                     tvLastTimeHint.setText(hint);
                     tvLastTimeHint.setVisibility(View.VISIBLE); // מדליקים את הטקסט!
