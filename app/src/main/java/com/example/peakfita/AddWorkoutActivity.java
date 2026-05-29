@@ -43,26 +43,26 @@ public class AddWorkoutActivity extends AppCompatActivity {
     }
     private void setWorkoutAlarm(String title, String timeStr, String dateStr) {
         try {
-            // מפרקים רק את השעה, מתעלמים מ-dateStr לחלוטין!
+            
             String[] timeParts = timeStr.split(":");
             int hour = Integer.parseInt(timeParts[0]);
             int minute = Integer.parseInt(timeParts[1]);
 
-            // לוקחים את לוח השנה של הרגע הזה בדיוק
+            
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, hour); // שעה בפורמט 24
+            calendar.set(Calendar.HOUR_OF_DAY, hour); 
             calendar.set(Calendar.MINUTE, minute);
             calendar.set(Calendar.SECOND, 0);
 
-            // מורידים 10 דקות
+            
             calendar.add(Calendar.MINUTE, -10);
 
             long triggerTime = calendar.getTimeInMillis();
             long currentTime = System.currentTimeMillis();
 
-            // אם הזמן שחושב כבר עבר (או שהוא פחות מדקה מעכשיו)
+            
             if (triggerTime <= currentTime) {
-                // מנגנון מבחן: נכוון את זה בדיוק ל-2 דקות מעכשיו!
+                
                 triggerTime = currentTime + (2 * 60000);
                 Toast.makeText(this, "הזמן כבר עבר! מכוון אוטומטית ל-2 דקות מעכשיו לבדיקה", Toast.LENGTH_LONG).show();
             } else {
@@ -102,7 +102,7 @@ public class AddWorkoutActivity extends AppCompatActivity {
             return;
         }
 
-        // פתרון השגיאה האדומה: יצירת משתנים "סופיים" (final) שלא ישתנו, במיוחד עבור ה-lambda של פיירבייס
+        
         final String finalDesc = desc.isEmpty() ? null : desc;
         final String finalTime = timeInput.isEmpty() ? null : timeInput;
 
@@ -119,7 +119,7 @@ public class AddWorkoutActivity extends AppCompatActivity {
         ref.child(workoutId).setValue(newWorkout)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // נכוון שעון *רק* אם המשתמש הזין שעה תקינה
+                        
                         if (finalTime != null) {
                             setWorkoutAlarm(title, finalTime, selectedDate);
                         }

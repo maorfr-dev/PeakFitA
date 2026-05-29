@@ -28,11 +28,11 @@ public class TrophyAdapter extends RecyclerView.Adapter<TrophyAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TrophyRecord trophy = trophyList.get(position);
 
-        // הופכים את האות הראשונה של התרגיל לגדולה בשביל היופי
+        
         String name = trophy.getExerciseName().substring(0, 1).toUpperCase() + trophy.getExerciseName().substring(1);
         holder.tvName.setText(name);
 
-        // מגדירים את המשקל בתוספת ק"ג
+        
         holder.tvWeight.setText(trophy.getMaxWeight() + " kg");
     }
 
@@ -51,7 +51,7 @@ public class TrophyAdapter extends RecyclerView.Adapter<TrophyAdapter.ViewHolder
         }
     }
 
-    // מחלקה פנימית קטנה ששומרת את הנתונים של כל שיא (שם תרגיל ומשקל)
+    
     public static class TrophyRecord {
         private String exerciseName;
         private double maxWeight;

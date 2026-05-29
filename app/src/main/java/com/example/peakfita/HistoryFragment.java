@@ -36,21 +36,21 @@ public class HistoryFragment extends Fragment {
         btnTrophyCabinet = view.findViewById(R.id.btnTrophyCabinet);
         rvHistoryWorkouts = view.findViewById(R.id.rvHistoryWorkouts);
 
-        // הגדרת הרשימה (RecyclerView)
+        
         historyList = new ArrayList<>();
         adapter = new HistoryWorkoutAdapter(historyList);
         rvHistoryWorkouts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvHistoryWorkouts.setAdapter(adapter);
 
-        // הפעלת פונקציית הטעינה מפיירבייס
+        
         loadHistoryFromFirebase();
 
-        // לחיצה על כפתור ארון הגביעים
+        
         btnTrophyCabinet.setOnClickListener(v -> {
-            // עוברים למסך ארון הגביעים החדש
+            
             getParentFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new TrophyCabinetFragment())
-                    // מוסיפים את המסך הקודם להיסטוריה כדי שכפתור ה"חזור" בטלפון יעבוד
+                    
                     .addToBackStack(null)
                     .commit();
         });
@@ -66,7 +66,7 @@ public class HistoryFragment extends Fragment {
         historyRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                historyList.clear(); // מנקים את הרשימה כדי למנוע כפילויות
+                historyList.clear(); 
 
                 for (DataSnapshot workoutSnapshot : snapshot.getChildren()) {
                     Workout workout = workoutSnapshot.getValue(Workout.class);
@@ -75,10 +75,10 @@ public class HistoryFragment extends Fragment {
                     }
                 }
 
-                // הופכים את הרשימה כדי שהאימון *האחרון* שעשינו יופיע ראשון למעלה!
+                
                 Collections.reverse(historyList);
 
-                adapter.notifyDataSetChanged(); // מעדכנים את המסך
+                adapter.notifyDataSetChanged(); 
             }
 
             @Override

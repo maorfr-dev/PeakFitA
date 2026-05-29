@@ -36,16 +36,16 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public void onBindViewHolder(@NonNull WorkoutViewHolder holder, int position) {
         Workout workout = workoutList.get(position);
         holder.tvTitle.setText(workout.getTitle());
-        // הגדרת התיאור של האימון
+        
         if (workout.getDescription() != null && !workout.getDescription().trim().isEmpty()) {
             holder.tvDesc.setVisibility(View.VISIBLE);
             holder.tvDesc.setText(workout.getDescription());
         } else {
-            // אם אין תיאור, מסתירים את תיבת הטקסט כדי שלא יהיה חלל ריק
+            
             holder.tvDesc.setVisibility(View.GONE);
         }
 
-        // מעבר למסך פרטי האימון (הקוד המקורי שלך)
+        
         holder.btnStart.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), WorkoutDetailsActivity.class);
 
@@ -55,9 +55,9 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
             v.getContext().startActivity(intent);
         });
 
-        // תוספת: לחיצה ארוכה למחיקת אימון
+        
         holder.itemView.setOnLongClickListener(v -> {
-            Context context = v.getContext(); // שולפים את ה-Context מהרכיב עליו לחצנו
+            Context context = v.getContext(); 
 
             new AlertDialog.Builder(context)
                     .setTitle("Delete Workout")
@@ -69,12 +69,12 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
                         FirebaseDatabase.getInstance().getReference("users")
                                 .child(userId)
                                 .child("workouts")
-                                .child(workout.getWorkoutId()) // מחיקה לפי ה-ID הייחודי
+                                .child(workout.getWorkoutId()) 
                                 .removeValue()
                                 .addOnSuccessListener(aVoid -> {
                                     Toast.makeText(context, "Workout deleted successfully", Toast.LENGTH_SHORT).show();
-                                    // הערה: אם אתה משתמש ב-ValueEventListener במסך הקודם,
-                                    // הרשימה תתרענן אוטומטית כי פיירבייס מזהה שינוי.
+                                    
+                                    
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(context, "Failed to delete: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -86,7 +86,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
                     .create()
                     .show();
 
-            return true; // מסמן למערכת שהלחיצה הארוכה טופלה
+            return true; 
         });
     }
 

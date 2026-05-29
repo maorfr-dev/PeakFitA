@@ -28,19 +28,19 @@ public class GeminiFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // טעינת העיצוב של המסך
+        
         View view = inflater.inflate(R.layout.fragment_gemini, container, false);
 
         eTMuscle = view.findViewById(R.id.eTMuscle);
         tVResult = view.findViewById(R.id.tVResult);
         btnSendPrompt = view.findViewById(R.id.btnSendPrompt);
 
-        // הגדרת גלילה לטקסט התשובה
+        
         tVResult.setMovementMethod(new ScrollingMovementMethod());
 
         geminiManager = GeminiManager.getInstance();
 
-        // מאזין ללחיצה על כפתור השליחה
+        
         btnSendPrompt.setOnClickListener(v -> textPrompt());
 
         return view;
@@ -54,14 +54,14 @@ public class GeminiFragment extends Fragment {
             return;
         }
 
-        // הסתרת המקלדת לאחר הלחיצה
+        
         View view = requireActivity().getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        // בניית הפרומפט
+        
         String prompt = "Recommend 3 exercises in the gym for the following muscle: " + muscle +
                 ". Return the name of the exercise, which specific part of the muscle it targets, and its advantages. Keep it in 150 words max.";
 
@@ -74,7 +74,7 @@ public class GeminiFragment extends Fragment {
         geminiManager.sendTextPrompt(prompt, new GeminiCallback() {
             @Override
             public void onSuccess(String result) {
-                // חובה לעדכן את ממשק המשתמש רק ב-Main Thread
+                
                 requireActivity().runOnUiThread(() -> {
                     pD.dismiss();
                     tVResult.setText(result);

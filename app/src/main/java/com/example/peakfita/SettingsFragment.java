@@ -24,9 +24,9 @@ public class SettingsFragment extends Fragment {
 
     private TextView tvUserEmail;
     private Button btnShareApp, btnContactSupport, btnLogout;
-    private SwitchMaterial switchNotifications; // המשתנה החדש למתג
+    private SwitchMaterial switchNotifications; 
     private FirebaseAuth mAuth;
-    private SharedPreferences sharedPreferences; // מנגנון השמירה המקומית
+    private SharedPreferences sharedPreferences; 
 
     @Nullable
     @Override
@@ -37,23 +37,23 @@ public class SettingsFragment extends Fragment {
         btnShareApp = view.findViewById(R.id.btnShareApp);
         btnContactSupport = view.findViewById(R.id.btnContactSupport);
         btnLogout = view.findViewById(R.id.btnLogout);
-        switchNotifications = view.findViewById(R.id.switchNotifications); // חיבור המתג מהעיצוב
+        switchNotifications = view.findViewById(R.id.switchNotifications); 
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        // אתחול SharedPreferences - יצירת קובץ שמירה מקומי בשם "PeakfitaPrefs"
+        
         sharedPreferences = requireActivity().getSharedPreferences("PeakfitaPrefs", Context.MODE_PRIVATE);
 
-        // טעינת מצב ההתראות השמור (ברירת המחדל היא true - מופעל)
+        
         boolean isNotificationsEnabled = sharedPreferences.getBoolean("notifications_enabled", true);
         switchNotifications.setChecked(isNotificationsEnabled);
 
-        // מאזין לשינויים במתג ההתראות ושמירת המצב החדש ב-SharedPreferences
+        
         switchNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("notifications_enabled", isChecked);
-            editor.apply(); // ביצוע השמירה ברקע
+            editor.apply(); 
 
             String status = isChecked ? "הופעלו" : "כובו";
             Toast.makeText(getContext(), "התראות אימונים " + status, Toast.LENGTH_SHORT).show();

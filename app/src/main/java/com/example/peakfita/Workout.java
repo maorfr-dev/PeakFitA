@@ -11,7 +11,7 @@ public class Workout {
     private String date;
     private String scheduledTime;
 
-    // התיקון שלנו: עכשיו זה List של תרגילים במקום Map!
+    
     private List<Exercise> exercises;
 
     public Workout() {
@@ -34,7 +34,7 @@ public class Workout {
     public String getDate() { return date; }
     public String getScheduledTime() { return scheduledTime; }
 
-    // ה-Getter המעודכן
+    
     public List<Exercise> getExercises() { return exercises; }
 
     public void setTitle(String title) { this.title = title; }
@@ -43,6 +43,6 @@ public class Workout {
     public void setDate(String date) { this.date = date; }
     public void setScheduledTime(String scheduledTime) { this.scheduledTime = scheduledTime; }
 
-    // ה-Setter המעודכן
+    
     public void setExercises(List<Exercise> exercises) { this.exercises = exercises; }
 }

@@ -14,7 +14,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "השעון עובד! מנסה להציג התראה...", Toast.LENGTH_LONG).show();
-        // מקבלים את שם האימון שנשלח מהמסך הקודם
+        
         String workoutTitle = intent.getStringExtra("workoutTitle");
         if (workoutTitle == null) {
             workoutTitle = "Workout";
@@ -23,7 +23,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String channelId = "workout_reminders";
 
-        // יצירת ערוץ התרעות - חובה החל מאנדרואיד 8 (Oreo) ומעלה
+        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     channelId,
@@ -33,15 +33,15 @@ public class AlarmReceiver extends BroadcastReceiver {
             manager.createNotificationChannel(channel);
         }
 
-        // בניית ההתרעה (Notification) באנגלית
+        
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(android.R.drawable.ic_lock_idle_alarm) // אייקון שעון מובנה
+                .setSmallIcon(android.R.drawable.ic_lock_idle_alarm) 
                 .setContentTitle("Time to Sweat! 💪")
                 .setContentText("Your workout '" + workoutTitle + "' is starting in 10 minutes!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true);
 
-        // שליחת ההתרעה למכשיר
+        
         manager.notify((int) System.currentTimeMillis(), builder.build());
     }
 }

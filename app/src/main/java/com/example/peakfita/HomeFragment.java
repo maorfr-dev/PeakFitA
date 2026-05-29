@@ -1,4 +1,4 @@
-package com.example.peakfita; // ודא שזה תואם לשם הפקאג' שלך
+package com.example.peakfita; 
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,27 +23,27 @@ public class HomeFragment extends Fragment {
         cardGemini = view.findViewById(R.id.cardGemini);
         cardSettings = view.findViewById(R.id.cardSettings);
 
-        // לחיצה על כרטיסיית אימון
+        
         cardWorkout.setOnClickListener(v -> loadFragment(new WorkoutsFragment()));
 
-        // לחיצה על כרטיסיית היסטוריה (ממנה נכנסים גם לארון הגביעים)
+        
         cardHistory.setOnClickListener(v -> loadFragment(new HistoryFragment()));
 
-        // לחיצה על כרטיסיית עוזר חכם
+        
         cardGemini.setOnClickListener(v -> loadFragment(new GeminiFragment()));
 
-        // לחיצה על כרטיסיית פרופיל
+        
         cardSettings.setOnClickListener(v -> loadFragment(new SettingsFragment()));
 
         return view;
     }
 
-    // מתודת עזר שמחליפה את המסך הנוכחי במסך שנבחר ומוסיפה אותו להיסטוריית החזרה (BackStack)
+    
     private void loadFragment(Fragment fragment) {
         if (getActivity() != null) {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null) // מאפשר למשתמש לחזור למסך הבית בלחיצה על כפתור חזור בטלפון
+                    .addToBackStack(null) 
                     .commit();
         }
     }

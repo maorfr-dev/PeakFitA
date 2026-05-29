@@ -51,7 +51,7 @@ public class TrophyCabinetFragment extends Fragment {
         historyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // המילון שיסנן וישמור רק את השיאים
+                
                 HashMap<String, Double> personalRecords = new HashMap<>();
 
                 for (DataSnapshot workoutSnapshot : snapshot.getChildren()) {
@@ -61,7 +61,7 @@ public class TrophyCabinetFragment extends Fragment {
                             String exerciseName = ex.getName().trim().toLowerCase();
                             double currentWeight = ex.getWeight();
 
-                            // אם התרגיל קיים, בודקים אם המשקל הנוכחי גבוה יותר מהשיא השמור
+                            
                             if (personalRecords.containsKey(exerciseName)) {
                                 if (currentWeight > personalRecords.get(exerciseName)) {
                                     personalRecords.put(exerciseName, currentWeight);
@@ -73,7 +73,7 @@ public class TrophyCabinetFragment extends Fragment {
                     }
                 }
 
-                // מעבירים את הנתונים מהמילון לרשימה של המתאם
+                
                 trophyList.clear();
                 for (Map.Entry<String, Double> entry : personalRecords.entrySet()) {
                     trophyList.add(new TrophyAdapter.TrophyRecord(entry.getKey(), entry.getValue()));

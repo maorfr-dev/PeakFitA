@@ -30,11 +30,11 @@ public class HistoryWorkoutAdapter extends RecyclerView.Adapter<HistoryWorkoutAd
         holder.tvTitle.setText(workout.getTitle());
         holder.tvDate.setText("Completed on: " + workout.getDate());
 
-        // 1. ספירת התרגילים
+        
         int count = (workout.getExercises() != null) ? workout.getExercises().size() : 0;
         holder.tvExercisesCount.setText(count + " Exercises Completed ✓");
 
-        // 2. בניית רשימת התרגילים המפורטת
+        
         if (workout.getExercises() != null && count > 0) {
             StringBuilder detailsBuilder = new StringBuilder();
             for (Exercise ex : workout.getExercises()) {
@@ -48,12 +48,12 @@ public class HistoryWorkoutAdapter extends RecyclerView.Adapter<HistoryWorkoutAd
             holder.tvExercisesDetails.setText("No exercise details available.");
         }
 
-        // 3. מנגנון הלחיצה (פתיחה וסגירה של הפירוט)
+        
         holder.itemView.setOnClickListener(v -> {
             if (holder.tvExercisesDetails.getVisibility() == View.GONE) {
-                holder.tvExercisesDetails.setVisibility(View.VISIBLE); // מציג
+                holder.tvExercisesDetails.setVisibility(View.VISIBLE); 
             } else {
-                holder.tvExercisesDetails.setVisibility(View.GONE); // מסתיר
+                holder.tvExercisesDetails.setVisibility(View.GONE); 
             }
         });
     }
@@ -71,7 +71,7 @@ public class HistoryWorkoutAdapter extends RecyclerView.Adapter<HistoryWorkoutAd
             tvTitle = itemView.findViewById(R.id.tvHistoryTitle);
             tvDate = itemView.findViewById(R.id.tvHistoryDate);
             tvExercisesCount = itemView.findViewById(R.id.tvHistoryExercisesCount);
-            // חיבור ה-TextView המוסתר החדש
+            
             tvExercisesDetails = itemView.findViewById(R.id.tvHistoryExercisesDetails);
         }
     }

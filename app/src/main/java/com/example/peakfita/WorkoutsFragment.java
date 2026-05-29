@@ -30,14 +30,14 @@ import java.util.Locale;
 
 public class WorkoutsFragment extends Fragment {
 
-    // עדכנו ל-MaterialButton כדי שיתאים לעיצוב החדש
+    
     private MaterialButton[] dayButtons = new MaterialButton[7];
     private String[] weekDates = new String[7];
     private int currentSelectedDay = 1;
     private String currentSelectedDate;
 
     private RecyclerView rvWorkouts;
-    private LinearLayout llEmptyState; // המשתנה למסך הריק
+    private LinearLayout llEmptyState; 
     private WorkoutAdapter adapter;
     private List<Workout> workoutList;
 
@@ -99,7 +99,7 @@ public class WorkoutsFragment extends Fragment {
 
     private void setupWeekDates() {
         Calendar calendar = Calendar.getInstance();
-        // מחזיר את לוח השנה ליום ראשון של השבוע הנוכחי
+        
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
@@ -109,15 +109,15 @@ public class WorkoutsFragment extends Fragment {
         }
     }
 
-    // מתודה מעודכנת שצובעת את הכפתורים בזהב ושחור בעזרת ColorStateList
+    
     private void updateSelectedDay(int selectedDay) {
         for (int i = 0; i < dayButtons.length; i++) {
             if (i == (selectedDay - 1)) {
-                // כפתור נבחר - רקע זהב וטקסט שחור
+                
                 dayButtons[i].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFD700")));
                 dayButtons[i].setTextColor(Color.parseColor("#121212"));
             } else {
-                // כפתור לא נבחר - רקע כהה וטקסט לבן
+                
                 dayButtons[i].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#1E1E1E")));
                 dayButtons[i].setTextColor(Color.parseColor("#FFFFFF"));
             }
@@ -144,7 +144,7 @@ public class WorkoutsFragment extends Fragment {
                         }
                         adapter.notifyDataSetChanged();
 
-                        // ניהול תצוגת ה-Empty State מול רשימת האימונים
+                        
                         if (workoutList.isEmpty()) {
                             rvWorkouts.setVisibility(View.GONE);
                             llEmptyState.setVisibility(View.VISIBLE);
