@@ -10,8 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +39,6 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
         
         workoutId = getIntent().getStringExtra("WORKOUT_ID");
         workoutTitle = getIntent().getStringExtra("WORKOUT_TITLE");
-
-        
         tvTitle = findViewById(R.id.tvActiveWorkoutTitle);
         etName = findViewById(R.id.etExerciseName);
         etSets = findViewById(R.id.etSets);
@@ -50,7 +51,7 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
         tvLastTimeHint = findViewById(R.id.tvLastTimeHint);
 
 
-        etName.setOnFocusChangeListener((v, hasFocus) -> {
+        etName.setOnFocusChangeListener((v, hasFocus) -> { //last-time exercise hint
             
             if (!hasFocus) {
                 String exerciseName = etName.getText().toString().trim();
@@ -86,14 +87,14 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
         DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("history");
 
         
-        historyRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+        historyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@androidx.annotation.NonNull com.google.firebase.database.DataSnapshot snapshot) {
+            public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
                 Exercise lastFoundExercise = null;
                 String lastWorkoutDate = "";
 
                 
-                for (com.google.firebase.database.DataSnapshot workoutSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot workoutSnapshot : snapshot.getChildren()) {
                     Workout workout = workoutSnapshot.getValue(Workout.class);
 
                     if (workout != null && workout.getExercises() != null) {
@@ -178,9 +179,9 @@ public class WorkoutDetailsActivity extends AppCompatActivity {
         DatabaseReference historyWorkoutRef = userRef.child("history").child(workoutId);
 
         
-        currentWorkoutRef.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
+        currentWorkoutRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@androidx.annotation.NonNull com.google.firebase.database.DataSnapshot snapshot) {
+            public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
                 Workout workout = snapshot.getValue(Workout.class);
 
                 if (workout != null) {

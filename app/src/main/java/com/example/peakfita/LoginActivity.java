@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         sharedPref = getSharedPreferences("myPrefs", MODE_PRIVATE);
         boolean stayIn = sharedPref.getBoolean("isStayConnected", false);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FBRef.refAuth;
 
         if (mAuth.getCurrentUser() != null && stayIn) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));

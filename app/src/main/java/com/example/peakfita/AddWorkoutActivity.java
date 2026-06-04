@@ -13,6 +13,11 @@ import java.util.Locale;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 
 public class AddWorkoutActivity extends AppCompatActivity {
@@ -33,7 +38,7 @@ public class AddWorkoutActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSaveWorkout);
         selectedDay = getIntent().getIntExtra("dayOfWeek", 1);
         selectedDate= getIntent().getStringExtra("selectedDate");
-        if (selectedDate == null) {
+        if (selectedDate == null) {//in case of error , use current day
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             selectedDate = sdf.format(new Date());
         }
@@ -41,55 +46,7 @@ public class AddWorkoutActivity extends AppCompatActivity {
             saveWorkoutToFirebase();
         });
     }
-    private void setWorkoutAlarm(String title, String timeStr, String dateStr) {
-        try {
-            
-            String[] timeParts = timeStr.split(":");
-            int hour = Integer.parseInt(timeParts[0]);
-            int minute = Integer.parseInt(timeParts[1]);
 
-            
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, hour); 
-            calendar.set(Calendar.MINUTE, minute);
-            calendar.set(Calendar.SECOND, 0);
-
-            
-            calendar.add(Calendar.MINUTE, -10);
-
-            long triggerTime = calendar.getTimeInMillis();
-            long currentTime = System.currentTimeMillis();
-
-            
-            if (triggerTime <= currentTime) {
-                
-                triggerTime = currentTime + (2 * 60000);
-                Toast.makeText(this, "הזמן כבר עבר! מכוון אוטומטית ל-2 דקות מעכשיו לבדיקה", Toast.LENGTH_LONG).show();
-            } else {
-                long diffMinutes = (triggerTime - currentTime) / 60000;
-                Toast.makeText(this, "מעולה! ההתראה תצלצל בעוד " + diffMinutes + " דקות", Toast.LENGTH_LONG).show();
-            }
-
-            Intent intent = new Intent(this, AlarmReceiver.class);
-            intent.putExtra("workoutTitle", title);
-
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                    this,
-                    (int) triggerTime,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-            );
-
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            if (alarmManager != null) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
-            }
-
-        } catch (Exception e) {
-            Toast.makeText(this, "שגיאה בפורמט השעה. נא להזין HH:mm", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
 
     private void saveWorkoutToFirebase() {
         String title = etTitle.getText().toString().trim();
@@ -103,16 +60,13 @@ public class AddWorkoutActivity extends AppCompatActivity {
         }
 
         
-        final String finalDesc = desc.isEmpty() ? null : desc;
+        final String finalDesc = desc.isEmpty() ? null : desc; // time and desc are optional
         final String finalTime = timeInput.isEmpty() ? null : timeInput;
 
-        String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
-        com.google.firebase.database.DatabaseReference ref =
-                com.google.firebase.database.FirebaseDatabase.getInstance().getReference("users")
-                        .child(userId)
-                        .child("workouts");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+      DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(userId).child("workouts");
 
-        String workoutId = ref.push().getKey();
+        String workoutId = ref.push().getKey();// generate random id for workout
         Workout newWorkout = new Workout(workoutId, title, finalDesc, selectedDay, selectedDate);
         newWorkout.setScheduledTime(finalTime);
 
@@ -120,7 +74,7 @@ public class AddWorkoutActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         
-                        if (finalTime != null) {
+                        if (finalTime != null) {//time is not required , if user inputed time , set alarm
                             setWorkoutAlarm(title, finalTime, selectedDate);
                         }
                         Toast.makeText(AddWorkoutActivity.this, "Workout saved!", Toast.LENGTH_SHORT).show();
@@ -129,6 +83,54 @@ public class AddWorkoutActivity extends AppCompatActivity {
                         Toast.makeText(AddWorkoutActivity.this, "Failed to save: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    private void setWorkoutAlarm(String title, String timeStr, String dateStr) {
+        try {
+
+            String[] timeParts = timeStr.split(":");
+            int hour = Integer.parseInt(timeParts[0]);
+            int minute = Integer.parseInt(timeParts[1]);
+
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
+            calendar.set(Calendar.SECOND, 0);
+
+
+            calendar.add(Calendar.MINUTE, -10);
+
+            long triggerTime = calendar.getTimeInMillis();
+            long currentTime = System.currentTimeMillis();
+
+
+            if (triggerTime <= currentTime) {
+
+
+                triggerTime = currentTime + (2 * 60000);//test : if time is in the past , set alarm to 2 minutes from now
+                Toast.makeText(this, "Time Already Past , Set Alarm for 2 Minutes From now!", Toast.LENGTH_LONG).show();
+            } else {
+                long diffMinutes = (triggerTime - currentTime) / 60000;
+                Toast.makeText(this, "Great! Alarm will ring in: " + diffMinutes + " Minutes", Toast.LENGTH_LONG).show();
+            }
+
+            Intent intent = new Intent(this, AlarmReceiver.class);
+            intent.putExtra("workoutTitle", title);
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    this,
+                    (int) triggerTime, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            );
+
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager != null) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(this, "שגיאה בפורמט השעה. נא להזין HH:mm", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
 

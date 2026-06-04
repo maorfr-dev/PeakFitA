@@ -24,6 +24,17 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public WorkoutAdapter(List<Workout> workoutList) {
         this.workoutList = workoutList;
     }
+    public static class WorkoutViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvDesc;
+        Button btnStart;
+
+        public WorkoutViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvWorkoutTitle);
+            tvDesc = itemView.findViewById(R.id.tvWorkoutDesc);
+            btnStart = itemView.findViewById(R.id.btnStartWorkout);
+        }
+    }
 
     @NonNull
     @Override
@@ -36,7 +47,6 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public void onBindViewHolder(@NonNull WorkoutViewHolder holder, int position) {
         Workout workout = workoutList.get(position);
         holder.tvTitle.setText(workout.getTitle());
-        
         if (workout.getDescription() != null && !workout.getDescription().trim().isEmpty()) {
             holder.tvDesc.setVisibility(View.VISIBLE);
             holder.tvDesc.setText(workout.getDescription());
@@ -51,14 +61,12 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
 
             intent.putExtra("WORKOUT_ID", workout.getWorkoutId());
             intent.putExtra("WORKOUT_TITLE", workout.getTitle());
-
             v.getContext().startActivity(intent);
         });
 
         
-        holder.itemView.setOnLongClickListener(v -> {
-            Context context = v.getContext(); 
-
+        holder.itemView.setOnLongClickListener(v -> {//workout deletion
+            Context context = v.getContext();
             new AlertDialog.Builder(context)
                     .setTitle("Delete Workout")
                     .setMessage("Are you sure you want to delete '" + workout.getTitle() + "'?")
@@ -95,15 +103,5 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         return workoutList.size();
     }
 
-    public static class WorkoutViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvDesc;
-        Button btnStart;
 
-        public WorkoutViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvWorkoutTitle);
-            tvDesc = itemView.findViewById(R.id.tvWorkoutDesc);
-            btnStart = itemView.findViewById(R.id.btnStartWorkout);
-        }
-    }
 }

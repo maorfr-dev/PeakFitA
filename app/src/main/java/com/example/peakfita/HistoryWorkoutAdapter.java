@@ -22,15 +22,24 @@ public class HistoryWorkoutAdapter extends RecyclerView.Adapter<HistoryWorkoutAd
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_workout, parent, false);
         return new ViewHolder(view);
     }
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvDate, tvExercisesCount, tvExercisesDetails;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvHistoryTitle);
+            tvDate = itemView.findViewById(R.id.tvHistoryDate);
+            tvExercisesCount = itemView.findViewById(R.id.tvHistoryExercisesCount);
+
+            tvExercisesDetails = itemView.findViewById(R.id.tvHistoryExercisesDetails);
+        }
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Workout workout = historyList.get(position);
-
         holder.tvTitle.setText(workout.getTitle());
         holder.tvDate.setText("Completed on: " + workout.getDate());
-
-        
         int count = (workout.getExercises() != null) ? workout.getExercises().size() : 0;
         holder.tvExercisesCount.setText(count + " Exercises Completed ✓");
 
@@ -49,7 +58,7 @@ public class HistoryWorkoutAdapter extends RecyclerView.Adapter<HistoryWorkoutAd
         }
 
         
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(v -> { // opening list of exercises
             if (holder.tvExercisesDetails.getVisibility() == View.GONE) {
                 holder.tvExercisesDetails.setVisibility(View.VISIBLE); 
             } else {
@@ -63,16 +72,5 @@ public class HistoryWorkoutAdapter extends RecyclerView.Adapter<HistoryWorkoutAd
         return historyList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvDate, tvExercisesCount, tvExercisesDetails;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvHistoryTitle);
-            tvDate = itemView.findViewById(R.id.tvHistoryDate);
-            tvExercisesCount = itemView.findViewById(R.id.tvHistoryExercisesCount);
-            
-            tvExercisesDetails = itemView.findViewById(R.id.tvHistoryExercisesDetails);
-        }
-    }
 }

@@ -24,7 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String channelId = "workout_reminders";
 
         
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { //newer versions of android need to create a notification channel
             NotificationChannel channel = new NotificationChannel(
                     channelId,
                     "Workout Reminders",

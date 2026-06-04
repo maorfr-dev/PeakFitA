@@ -51,9 +51,7 @@ public class TrophyCabinetFragment extends Fragment {
         historyRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                
                 HashMap<String, Double> personalRecords = new HashMap<>();
-
                 for (DataSnapshot workoutSnapshot : snapshot.getChildren()) {
                     Workout workout = workoutSnapshot.getValue(Workout.class);
                     if (workout != null && workout.getExercises() != null) {
@@ -62,11 +60,14 @@ public class TrophyCabinetFragment extends Fragment {
                             double currentWeight = ex.getWeight();
 
                             
-                            if (personalRecords.containsKey(exerciseName)) {
-                                if (currentWeight > personalRecords.get(exerciseName)) {
+                            if (personalRecords.containsKey(exerciseName))
+                            {
+                                if (currentWeight > personalRecords.get(exerciseName))
+                                {
                                     personalRecords.put(exerciseName, currentWeight);
                                 }
-                            } else {
+                            }
+                            else {//if key does not exist , adds new exercise to the cabinet
                                 personalRecords.put(exerciseName, currentWeight);
                             }
                         }

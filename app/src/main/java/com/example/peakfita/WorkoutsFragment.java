@@ -69,7 +69,7 @@ public class WorkoutsFragment extends Fragment {
         dayButtons[5] = view.findViewById(R.id.btnDay6);
         dayButtons[6] = view.findViewById(R.id.btnDay7);
 
-        for (int i = 0; i < dayButtons.length; i++) {
+        for (int i = 0; i < dayButtons.length; i++) {  // button function , when clicked , changes button color , updated day and date and loads workouts for that date
             final int dayIndex = i + 1;
             final String dateForThisButton = weekDates[i];
 
@@ -89,7 +89,7 @@ public class WorkoutsFragment extends Fragment {
             startActivity(intent);
         });
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(); // finds current day colors it and loads workouts for it
         int todayIndex = calendar.get(Calendar.DAY_OF_WEEK);
         currentSelectedDay = todayIndex;
         currentSelectedDate = weekDates[todayIndex - 1];
@@ -97,7 +97,7 @@ public class WorkoutsFragment extends Fragment {
         loadWorkoutsForDate(currentSelectedDate);
     }
 
-    private void setupWeekDates() {
+    private void setupWeekDates() { // sets up week dates array
         Calendar calendar = Calendar.getInstance();
         
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
@@ -110,7 +110,7 @@ public class WorkoutsFragment extends Fragment {
     }
 
     
-    private void updateSelectedDay(int selectedDay) {
+    private void updateSelectedDay(int selectedDay) { // updates day button colors
         for (int i = 0; i < dayButtons.length; i++) {
             if (i == (selectedDay - 1)) {
                 
@@ -124,7 +124,7 @@ public class WorkoutsFragment extends Fragment {
         }
     }
 
-    private void loadWorkoutsForDate(String date) {
+    private void loadWorkoutsForDate(String date) { // loads workout for given date , firebase database
         if (FirebaseAuth.getInstance().getCurrentUser() == null) return;
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();

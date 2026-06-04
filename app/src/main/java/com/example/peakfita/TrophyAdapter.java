@@ -16,6 +16,15 @@ public class TrophyAdapter extends RecyclerView.Adapter<TrophyAdapter.ViewHolder
 
         this.trophyList = trophyList;
     }
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName, tvWeight;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvName = itemView.findViewById(R.id.tvTrophyExerciseName);
+            tvWeight = itemView.findViewById(R.id.tvTrophyWeight);
+        }
+    }
 
     @NonNull
     @Override
@@ -27,12 +36,8 @@ public class TrophyAdapter extends RecyclerView.Adapter<TrophyAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TrophyRecord trophy = trophyList.get(position);
-
-        
         String name = trophy.getExerciseName().substring(0, 1).toUpperCase() + trophy.getExerciseName().substring(1);
         holder.tvName.setText(name);
-
-        
         holder.tvWeight.setText(trophy.getMaxWeight() + " kg");
     }
 
@@ -41,15 +46,6 @@ public class TrophyAdapter extends RecyclerView.Adapter<TrophyAdapter.ViewHolder
         return trophyList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvWeight;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvName = itemView.findViewById(R.id.tvTrophyExerciseName);
-            tvWeight = itemView.findViewById(R.id.tvTrophyWeight);
-        }
-    }
 
     
     public static class TrophyRecord {
